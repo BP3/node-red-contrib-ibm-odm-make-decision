@@ -1,0 +1,84 @@
+<!--
+This software is provided under the MIT agreement.
+
+Copyright 2018 BP3 Global, Incorporated.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<script type="text/javascript">
+  RED.nodes.registerType("ruleapp-config", {
+    category: "config",
+    defaults: {
+      name: {},
+      decisionId: {},
+      ruleappName: {},
+      ruleappVersion: {},
+      rulesetName: {},
+      rulesetVersion: {},
+      includeTrace: {
+        value: false
+      }
+    },
+    label: function() {
+      return this.name;
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="ruleapp-config">
+  <div class="form-row">
+    <label for="node-config-input-name">Name</label>
+    <input type="text" id="node-config-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-decisionId">Decision Id</label>
+    <input type="text" id="node-config-input-decisionId" placeholder="Decision Id">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-ruleappName">Rule App Name</label>
+    <input type="text" id="node-config-input-ruleappName" placeholder="Rule App Name">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-ruleappVersion">Rule App Version</label>
+    <input type="text" id="node-config-input-ruleappVersion" placeholder="Rule App Version">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-rulesetName">Rule Set Name</label>
+    <input type="text" id="node-config-input-rulesetName" placeholder="Rule Set Name">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-rulesetVersion">Rule Set Version</label>
+    <input type="text" id="node-config-input-rulesetVersion" placeholder="Rule Set Version">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-includeTrace">Include Execution Trace?</label>
+    <input type="checkbox" id="node-config-input-includeTrace">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="ruleapp-config">
+  <p>This configuration node allows the decision service details to be set and reused across multiple make decision nodes.</p>
+  <p>The available configuration properties are:</p>
+  <ul>
+    <li>
+      <b>DecisionId:</b> The decision Id to pass to the service that will be returned back. Useful for tracking transaction Id&quot;s through the system.
+    </li>
+    <li>
+      <b>Rule App Name:</b> The name of the rule app to be executed.
+    </li>
+    <li>
+      <b>Rule App Version:</b> The version of rule app to be executed. If left empty then the latest version of the rule app will be executed.
+    </li>
+    <li>
+      <b>Rule Set Name:</b> The name of the rule set to be executed.
+    </li>
+    <li>
+      <b>Rule Set Version:</b> The version of rule set to be executed. If left empty then the latest version of the rule set will be executed.
+    </li>
+    <li>
+      <b>Include Execution Trace?:</b> If set to <code>true</code> then (a subset of) trace information will be returned back in the response.
+    </li>
+  </ul>
+</script>
