@@ -1,12 +1,19 @@
-<!--
-This software is provided under the MIT agreement.
-
-Copyright 2018 BP3 Global, Incorporated.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
+<!--========================================================================
+ =
+ = Copyright (c) BP3 Global Inc. 2018. All Rights Reserved.
+ =
+ = Permission is hereby granted, free of charge, to any person obtaining
+ = a copy of this software and associated documentation files (the
+ = "Software"), to deal in the Software without restriction, including
+ = without limitation the rights to use, copy, modify, merge, publish,
+ = distribute, sublicense, and/or sell copies of the Software, and to
+ = permit persons to whom the Software is furnished to do so, subject to
+ = the following conditions:
+ =
+ = The above copyright notice and this permission notice shall be
+ = included in all copies or substantial portions of the Software.
+ =
+ ===========================================================================-->
 <script type="text/javascript">
   RED.nodes.registerType("ruleapp-config", {
     category: "config",
@@ -59,26 +66,31 @@ The above copyright notice and this permission notice shall be included in all c
 </script>
 
 <script type="text/x-red" data-help-name="ruleapp-config">
-  <p>This configuration node allows the decision service details to be set and reused across multiple make decision nodes.</p>
+  <p>This configuration node allows the decision service details to be set
+   and reused across multiple make decision nodes.</p>
   <p>The available configuration properties are:</p>
   <ul>
     <li>
-      <b>DecisionId:</b> The decision Id to pass to the service that will be returned back. Useful for tracking transaction Id&quot;s through the system.
+      <b>DecisionId:</b> The decision Id to pass to the service that will be returned back.
+       Useful for tracking transaction Id&quot;s through the system.
     </li>
     <li>
       <b>Rule App Name:</b> The name of the rule app to be executed.
     </li>
     <li>
-      <b>Rule App Version:</b> The version of rule app to be executed. If left empty then the latest version of the rule app will be executed.
+      <b>Rule App Version:</b> The version of rule app to be executed.
+       If left empty then the latest version of the rule app will be executed.
     </li>
     <li>
       <b>Rule Set Name:</b> The name of the rule set to be executed.
     </li>
     <li>
-      <b>Rule Set Version:</b> The version of rule set to be executed. If left empty then the latest version of the rule set will be executed.
+      <b>Rule Set Version:</b> The version of rule set to be executed.
+       If left empty then the latest version of the rule set will be executed.
     </li>
     <li>
-      <b>Include Execution Trace?:</b> If set to <code>true</code> then (a subset of) trace information will be returned back in the response.
+      <b>Include Execution Trace?:</b> If set to <code>true</code> then (a subset of) trace
+       information will be returned back in the response.
     </li>
   </ul>
 </script>

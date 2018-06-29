@@ -1,12 +1,19 @@
-<!--
-This software is provided under the MIT agreement.
-
-Copyright 2018 BP3 Global, Incorporated.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
+<!--========================================================================
+ =
+ = Copyright (c) BP3 Global Inc. 2018. All Rights Reserved.
+ =
+ = Permission is hereby granted, free of charge, to any person obtaining
+ = a copy of this software and associated documentation files (the
+ = "Software"), to deal in the Software without restriction, including
+ = without limitation the rights to use, copy, modify, merge, publish,
+ = distribute, sublicense, and/or sell copies of the Software, and to
+ = permit persons to whom the Software is furnished to do so, subject to
+ = the following conditions:
+ =
+ = The above copyright notice and this permission notice shall be
+ = included in all copies or substantial portions of the Software.
+ =
+ ===========================================================================-->
 <script type="text/javascript">
   RED.nodes.registerType("make-decision", {
     category: "IBM ODM",
@@ -58,7 +65,8 @@ The above copyright notice and this permission notice shall be included in all c
     <dt>msg.odm.config
             <span class="property-type">object</span>
         </dt>
-    <dd>Configuration of decision service can be performed outside of the node itself by passing the items into the message (see sections below for more details). These should be passed in as a JavaScript object.</dd>
+    <dd>Configuration of decision service can be performed outside of the node itself by passing the items into the
+     message (see sections below for more details). These should be passed in as a JavaScript object.</dd>
   </dl>
 
   <h3>Outputs</h3>
@@ -81,35 +89,45 @@ The above copyright notice and this permission notice shall be included in all c
   <h4>Setting up the request</h4>
   <p>The request comprises of the decision service input message and any additional service configuration that is required.</p>
   <p>The request message should be in the JavaScript object format as set onto the <code>msg.payload</code> attribute.</p>
-  <p>If you want to dynamically set the properties of the node rather than using the node properties editor, then you can do this via the <code>msg.odm</code> attribute. You can of course mix and match between setting some dynamically and some via the node
-    properties editor. The available configuration properties are:</p>
+  <p>If you want to dynamically set the properties of the node rather than using the node properties editor, then you
+   can do this via the <code>msg.odm</code> attribute. You can of course mix and match between setting some dynamically
+   and some via the node properties editor. The available configuration properties are:</p>
   <ul>
     <li>
-      <code>msg.odm.config.decisionId</code>: The decision Id to pass to the service that will be returned back. Useful for tracking transaction Id&quot;s through the system.
+      <code>msg.odm.config.decisionId</code>: The decision Id to pass to the service that will be returned back.
+       Useful for tracking transaction Id&quot;s through the system.
     </li>
     <li>
-      <code>msg.odm.config.protocolHost</code>: This is the HTTP protocol and the host, for example <code>http://localhost</code> or <code>https://myodm.bpm.ibmcloud.com</code>.
+      <code>msg.odm.config.protocolHost</code>: This is the HTTP protocol and the host,
+       for example <code>http://localhost</code> or <code>https://myodm.bpm.ibmcloud.com</code>.
     </li>
     <li>
-      <code>msg.odm.config.port</code>: This is the port (which can be blank), for example <code>9080</code> or <code>9443</code>.
+      <code>msg.odm.config.port</code>: This is the port (which can be blank),
+       for example <code>9080</code> or <code>9443</code>.
     </li>
     <li>
-      <code>msg.odm.config.baseEndPointURL</code>: This is the endpoint base URL upto the rule app name (but after the protocol and host) which forms the start of the ruleset path. For example <code>odm/dev/DecisionService/rest/v1</code>.
+      <code>msg.odm.config.baseEndPointURL</code>: This is the endpoint base URL upto the rule app name
+       (but after the protocol and host) which forms the start of the ruleset path.
+        For example <code>odm/dev/DecisionService/rest/v1</code>.
     </li>
     <li>
       <code>msg.odm.config.ruleappName</code>: The name of the rule app to be executed.
     </li>
     <li>
-      <code>msg.odm.config.ruleappVersion</code>: The version of rule app to be executed. If left empty then the latest version of the rule app will be executed.
+      <code>msg.odm.config.ruleappVersion</code>: The version of rule app to be executed.
+       If left empty then the latest version of the rule app will be executed.
     </li>
     <li>
       <code>msg.odm.config.rulesetName</code>: The name of the rule set to be executed.
     </li>
     <li>
-      <code>msg.odm.config.rulesetVersion</code>: The version of rule set to be executed. If left empty then the latest version of the rule set will be executed.
+      <code>msg.odm.config.rulesetVersion</code>: The version of rule set to be executed.
+       If left empty then the latest version of the rule set will be executed.
     </li>
     <li>
-      <code>msg.odm.config.useBasicAuthentication</code>: If set to <code>true</code> then the decision service call will attempt to authenticate using Basic Authentication. If set to <code>false</code> then no authentication will be performed.
+      <code>msg.odm.config.useBasicAuthentication</code>:
+       If set to <code>true</code> then the decision service call will attempt to authenticate using Basic Authentication.
+        If set to <code>false</code> then no authentication will be performed.
     </li>
     <li>
       <code>msg.odm.config.authUser</code>: The user used in the basic authentication authorisation process.
@@ -118,15 +136,19 @@ The above copyright notice and this permission notice shall be included in all c
       <code>msg.odm.config.authPassword</code>: The password used in the basic authentication authorisation process.
     </li>
     <li>
-      <code>msg.odm.config.includeTrace</code>: If set to <code>true</code> then (a subset of) trace information will be returned back in the response (see section below for more details).
+      <code>msg.odm.config.includeTrace</code>: If set to <code>true</code> then (a subset of) trace information will
+       be returned back in the response (see section below for more details).
     </li>
   </ul>
 
   <h4>Successful response</h4>
   <p>
-    If the request was successful then the <code>msg.payload</code> attribute will contain the raw decision service response. The <code>msg.odm</code> attribute will also contain additional information about the service call including trace information
-    if that was requested. This will also be present in the <code>msg.payload</code> but it is parsed and made more readily available in this object to save you from having to extract and parse it. The trace information returned just contains the most
-    commonly requested useful items and there is no current way of defining the trace filters individually. The items returned are:
+    If the request was successful then the <code>msg.payload</code> attribute will contain the raw decision service
+    response. The <code>msg.odm</code> attribute will also contain additional information about the service call
+    including trace information if that was requested. This will also be present in the <code>msg.payload</code> but
+    it is parsed and made more readily available in this object to save you from having to extract and parse it. The
+    trace information returned just contains the most commonly requested useful items and there is no current way of
+     defining the trace filters individually. The items returned are:
   </p>
   <ul>
     <li>
@@ -139,10 +161,12 @@ The above copyright notice and this permission notice shall be included in all c
       <code>msg.odm.decisionId</code>: The decision Id sent in the request, or a generated one from the Decision Server.
     </li>
     <li>
-      <code>msg.odm.requestedRulesetPath</code>: The rule set path requested in the decision service URL, for example <code>/MyRuleApp/MyRuleSet</code>.
+      <code>msg.odm.requestedRulesetPath</code>: The rule set path requested in the decision service URL,
+       for example <code>/MyRuleApp/MyRuleSet</code>.
     </li>
     <li>
-      <code>msg.odm.requestedRulesetPath</code>: The actual rule set path that was executed, for example <code>/MyRuleApp/1.0/MyRuleSet/2.0</code>.
+      <code>msg.odm.requestedRulesetPath</code>: The actual rule set path that was executed,
+       for example <code>/MyRuleApp/1.0/MyRuleSet/2.0</code>.
     </li>
     <li>
       <code>msg.odm.executionDate</code>: The time stamp of when the decision service was executed.
@@ -154,24 +178,32 @@ The above copyright notice and this permission notice shall be included in all c
       <code>msg.odm.rulesFired</code>: A list of the rules that fired (business rule names only).
     </li>
     <li>
-      <code>msg.odm.hasErrored</code>: Indicates if the service execution has failed for any reason or not. For successfull calls this will be <code>false</code>.
+      <code>msg.odm.hasErrored</code>: Indicates if the service execution has failed for any reason or not.
+       For successful calls this will be <code>false</code>.
     </li>
     <li>
-      <code>msg.odm.serviceStatusCode</code>: This will contain the HTTP status code. For successfull calls this will be <code>200</code>.
+      <code>msg.odm.serviceStatusCode</code>: This will contain the HTTP status code.
+       For successful calls this will be <code>200</code>.
     </li>
   </ul>
 
   <h4>Failures</h4>
   <p>
-    Failures can manifest themselves in several ways. First, the request could be sent to Decision Server but the format of the request is incorrect, or the rule set path does not exist. Other types of errors could be HTTP transport type errors, such as the
-    server being unavailable. The raw failure/error messages will set in the <code>msg.payload</code> attribute. In addition, an error indicator and HTTP status code (if available) will be set in the <code>msg.odm</code> attribute as detailed below
-    to make it easier to interpret handle further in the flows:</p>
+    Failures can manifest themselves in several ways. First, the request could be sent to Decision Server but the format
+    of the request is incorrect, or the rule set path does not exist. Other types of errors could be HTTP transport type
+    errors, such as the server being unavailable. The raw failure/error messages will set in the
+    <code>msg.payload</code> attribute. In addition, an error indicator and HTTP status code (if available) will be set
+    in the <code>msg.odm</code> attribute as detailed below to make it easier to interpret handle further in the flows:
+  </p>
   <ul>
     <li>
-      <code>msg.odm.hasErrored</code>: Indicates if the service execution has failed for any reason or not. For failed calls this will be <code>true</code>.
+      <code>msg.odm.hasErrored</code>: Indicates if the service execution has failed for any reason or not.
+       For failed calls this will be <code>true</code>.
     </li>
     <li>
-      <code>msg.odm.serviceStatusCode</code>: This will contain the HTTP status code. For failed calls this might be set if the request made it to the target Decision Server, or for local failures it will not.
+      <code>msg.odm.serviceStatusCode</code>: This will contain the HTTP status code.
+      For failed calls this might be set if the request made it to the target Decision Server,
+      or for local failures it will not.
     </li>
   </ul>
 </script>

@@ -1,10 +1,10 @@
 # Introduction
-This Node-RED node allows IBM ODM decision services to be configured and executed from within a single node without having to resort to configuring a series nodes within a flow.
+This Node-RED node allows IBM ODM decision services to be configured and executed from within a single node without having to resort to configuring a series of nodes within a flow.
 
 The purpose is to hide away the complexities of calling decision services and extracting the various parts of the response such as execution trace information, whilst providing easy to use configuration options that deal with the specifics of ODM.
 
 # Usage
-The Make Decision node can be found in the IBM ODM palette. Simply drag onto the canvas to start configuring and using it. It can be found in the IBM ODM section of the node palette as shown below.
+The `Make Decision` node can be found in the IBM ODM palette. Simply drag onto the canvas to start configuring and using it. It can be found in the IBM ODM section of the node palette as shown below.
 
 ![](./images/make-decision-palette.png)
 
