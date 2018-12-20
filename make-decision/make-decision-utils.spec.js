@@ -162,7 +162,7 @@ describe("test the building of the decision service configuration object", funct
     var expectedConfig = JSON.parse(JSON.stringify(baseExpectedConfig));
     expectedConfig.ruleappName = mockMsg.odm.config.ruleappName;
 
-    var actualConfig = makeDecisionUtils.loadConfig(mockRED, mockNodeConfig, mockMsg);
+    var actualConfig = makeDecisionUtils.combineConfig(mockRED, mockNodeConfig, mockMsg);
 
     chai.expect(actualConfig).to.eql(expectedConfig);
   });
@@ -180,7 +180,7 @@ describe("test the building of the decision service configuration object", funct
     var expectedConfig = JSON.parse(JSON.stringify(baseExpectedConfig));
     expectedConfig.ruleappVersion = mockMsg.odm.config.ruleappVersion;
 
-    var actualConfig = makeDecisionUtils.loadConfig(mockRED, mockNodeConfig, mockMsg);
+    var actualConfig = makeDecisionUtils.combineConfig(mockRED, mockNodeConfig, mockMsg);
 
     chai.expect(actualConfig).to.eql(expectedConfig);
   });
@@ -198,7 +198,7 @@ describe("test the building of the decision service configuration object", funct
     var expectedConfig = JSON.parse(JSON.stringify(baseExpectedConfig));
     expectedConfig.rulesetName = mockMsg.odm.config.rulesetName;
 
-    var actualConfig = makeDecisionUtils.loadConfig(mockRED, mockNodeConfig, mockMsg);
+    var actualConfig = makeDecisionUtils.combineConfig(mockRED, mockNodeConfig, mockMsg);
 
     chai.expect(actualConfig).to.eql(expectedConfig);
   });
@@ -216,7 +216,7 @@ describe("test the building of the decision service configuration object", funct
     var expectedConfig = JSON.parse(JSON.stringify(baseExpectedConfig));
     expectedConfig.rulesetVersion = mockMsg.odm.config.rulesetVersion;
 
-    var actualConfig = makeDecisionUtils.loadConfig(mockRED, mockNodeConfig, mockMsg);
+    var actualConfig = makeDecisionUtils.combineConfig(mockRED, mockNodeConfig, mockMsg);
 
     chai.expect(actualConfig).to.eql(expectedConfig);
   });
@@ -234,7 +234,7 @@ describe("test the building of the decision service configuration object", funct
     var expectedConfig = JSON.parse(JSON.stringify(baseExpectedConfig));
     expectedConfig.includeTrace = mockMsg.odm.config.includeTrace;
 
-    var actualConfig = makeDecisionUtils.loadConfig(mockRED, mockNodeConfig, mockMsg);
+    var actualConfig = makeDecisionUtils.combineConfig(mockRED, mockNodeConfig, mockMsg);
 
     chai.expect(actualConfig).to.eql(expectedConfig);
   });
@@ -252,7 +252,7 @@ describe("test the building of the decision service configuration object", funct
     var expectedConfig = JSON.parse(JSON.stringify(baseExpectedConfig));
     expectedConfig.protocolHost = mockMsg.odm.config.protocolHost;
 
-    var actualConfig = makeDecisionUtils.loadConfig(mockRED, mockNodeConfig, mockMsg);
+    var actualConfig = makeDecisionUtils.combineConfig(mockRED, mockNodeConfig, mockMsg);
 
     chai.expect(actualConfig).to.eql(expectedConfig);
   });
@@ -270,7 +270,7 @@ describe("test the building of the decision service configuration object", funct
     var expectedConfig = JSON.parse(JSON.stringify(baseExpectedConfig));
     expectedConfig.port = mockMsg.odm.config.port;
 
-    var actualConfig = makeDecisionUtils.loadConfig(mockRED, mockNodeConfig, mockMsg);
+    var actualConfig = makeDecisionUtils.combineConfig(mockRED, mockNodeConfig, mockMsg);
 
     chai.expect(actualConfig).to.eql(expectedConfig);
   });
@@ -288,7 +288,7 @@ describe("test the building of the decision service configuration object", funct
     var expectedConfig = JSON.parse(JSON.stringify(baseExpectedConfig));
     expectedConfig.baseEndpointURL = mockMsg.odm.config.baseEndpointURL;
 
-    var actualConfig = makeDecisionUtils.loadConfig(mockRED, mockNodeConfig, mockMsg);
+    var actualConfig = makeDecisionUtils.combineConfig(mockRED, mockNodeConfig, mockMsg);
 
     chai.expect(actualConfig).to.eql(expectedConfig);
   });
@@ -306,7 +306,7 @@ describe("test the building of the decision service configuration object", funct
     var expectedConfig = JSON.parse(JSON.stringify(baseExpectedConfig));
     expectedConfig.useBasicAuthentication = mockMsg.odm.config.useBasicAuthentication;
 
-    var actualConfig = makeDecisionUtils.loadConfig(mockRED, mockNodeConfig, mockMsg);
+    var actualConfig = makeDecisionUtils.combineConfig(mockRED, mockNodeConfig, mockMsg);
 
     chai.expect(actualConfig).to.eql(expectedConfig);
   });
@@ -324,7 +324,7 @@ describe("test the building of the decision service configuration object", funct
     var expectedConfig = JSON.parse(JSON.stringify(baseExpectedConfig));
     expectedConfig.authUser = mockMsg.odm.config.authUser;
 
-    var actualConfig = makeDecisionUtils.loadConfig(mockRED, mockNodeConfig, mockMsg);
+    var actualConfig = makeDecisionUtils.combineConfig(mockRED, mockNodeConfig, mockMsg);
 
     chai.expect(actualConfig).to.eql(expectedConfig);
   });
@@ -342,7 +342,7 @@ describe("test the building of the decision service configuration object", funct
     var expectedConfig = JSON.parse(JSON.stringify(baseExpectedConfig));
     expectedConfig.authPassword = mockMsg.odm.config.authPassword;
 
-    var actualConfig = makeDecisionUtils.loadConfig(mockRED, mockNodeConfig, mockMsg);
+    var actualConfig = makeDecisionUtils.combineConfig(mockRED, mockNodeConfig, mockMsg);
 
     chai.expect(actualConfig).to.eql(expectedConfig);
   });

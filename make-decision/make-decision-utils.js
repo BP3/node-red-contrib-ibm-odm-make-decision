@@ -42,7 +42,7 @@ module.exports = function() {
   //
   // Loads the config from either the node or the message (or a combination of both)
   //
-  this.loadConfig = function(RED, nodeConfig, msg) {
+  this.combineConfig = function(RED, nodeConfig, msg) {
     console.log("Loading configuration");
 
     var localConfig = {};

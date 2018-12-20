@@ -24,6 +24,9 @@ You can also set the decision service configuration dynamically by setting prope
 
 There is full documentation on how to configure the node within the node help info. There is also an example flow which can be imported from the file `make-decision/make-decision-test-flow.json`.
 
+# Testing
+To run the unit tests, use the following command from the root of the project: `npm run test`.
+
 # Limitations
 The component currently only works with JSON/REST services. This decision was made due to the fact that JSON/REST is the most popular method of communicating with ODM decision services, and that natively Node-RED works with JSON and Javascript Objects. If there is a demand for SOAP or XML/REST, then we will look to build it into the component.
 
@@ -35,7 +38,7 @@ The execution trace currently only returns the following information. Again of m
 - Execution duration
 - List of the rules fired
 
-# Testing
+# Compatability
 This component has been tested with the following ODM versions:
 - ODM 8.9.2
 - ODM On Cloud (version based on ODM 8.9 at the time of testing)

@@ -26,12 +26,13 @@ module.exports = function(RED) {
     node.on("input", function(msg) {
 
       console.log("Make decision input called");
+      console.log("MakeDecision msg: " + JSON.stringify(msg, true));
 
       var makeDecisionUtils = new MakeDecisionUtils();
 
       // If all or some of the service configuration has been passed through in the message
       // rather than via the nodes config then use them over the configuration
-      var localConfig = makeDecisionUtils.loadConfig(RED, config, msg);
+      var localConfig = makeDecisionUtils.combineConfig(RED, config, msg);
 
       // Build the full decision endpoint URL
       var dsUrl = makeDecisionUtils.buildDecisionServiceURL(localConfig);
