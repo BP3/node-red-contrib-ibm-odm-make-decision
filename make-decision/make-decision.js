@@ -26,7 +26,6 @@ module.exports = function(RED) {
     node.on("input", function(msg) {
 
       console.log("Make decision input called");
-      console.log("MakeDecision msg: " + JSON.stringify(msg, true));
 
       var makeDecisionUtils = new MakeDecisionUtils();
 
