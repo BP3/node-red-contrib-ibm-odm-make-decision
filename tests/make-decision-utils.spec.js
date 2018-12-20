@@ -15,7 +15,7 @@
  =
  ============================================================================*/
 var chai = require("chai");
-var MakeDecisionUtils = require("./make-decision-utils.js");
+var MakeDecisionUtils = require("../make-decision/make-decision-utils.js");
 var makeDecisionUtils = new MakeDecisionUtils();
 
 describe("test the building of the decision service URL", function() {
