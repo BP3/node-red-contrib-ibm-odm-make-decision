@@ -45,13 +45,18 @@ module.exports = function() {
   this.combineConfig = function(RED, nodeConfig, msg) {
     console.log("Loading configuration");
 
-    var localConfig = {};
-
-    var msgConfig = msg.odm.config;
+    // We may not have config passed in via the message, only from the
+    // config nodes
+    var msgConfig = {};
+    if(msg.odm && msg.odm.config)
+    {
+      msgConfig = msg.odm.config;
+    }
 
     // Load the rule app config node to get the rule app information
     var ruleappConfig = RED.nodes.getNode(nodeConfig.ruleapp);
 
+    var localConfig = {};
     localConfig.ruleappName = msgConfig.ruleappName || ruleappConfig.ruleappName;
     localConfig.ruleappVersion = msgConfig.ruleappVersion || ruleappConfig.ruleappVersion;
     localConfig.rulesetName = msgConfig.rulesetName || ruleappConfig.rulesetName;
