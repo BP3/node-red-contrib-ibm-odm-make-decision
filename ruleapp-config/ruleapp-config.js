@@ -15,14 +15,14 @@
  =
  ============================================================================*/
 module.exports = function(RED) {
-  function RuleAppConfigNode(n) {
-    RED.nodes.createNode(this, n);
-    this.name = n.name;
-    this.ruleappName = n.ruleappName;
-    this.ruleappVersion = n.ruleappVersion;
-    this.rulesetName = n.rulesetName;
-    this.rulesetVersion = n.rulesetVersion;
-    this.includeTrace = n.includeTrace;
+  function RuleAppConfigNode(config) {
+    RED.nodes.createNode(this, config);
+    this.name = config.name;
+    this.ruleappName = config.ruleappName;
+    this.ruleappVersion = config.ruleappVersion;
+    this.rulesetName = config.rulesetName;
+    this.rulesetVersion = config.rulesetVersion;
+    this.includeTrace = config.includeTrace;
   }
 
   RED.nodes.registerType("ruleapp-config", RuleAppConfigNode, {
