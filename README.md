@@ -6,21 +6,21 @@ The purpose is to hide away the complexities of calling decision services and ex
 # Usage
 The Make Decision node can be found in the IBM ODM palette. Simply drag onto the canvas to start configuring and using it. It can be found in the IBM ODM section of the node palette as shown below.
 
-![](./images/make-decision-palette.png)
+![](https://github.com/BP3/node-red-contrib-ibm-odm-make-decision/blob/master/images/make-decision-palette.png)
 
 When the decision service is called, the status of the service is displayed on the flow, as shown below.
 
-![](./images/test-flow-service-status.png)
+![](https://github.com/BP3/node-red-contrib-ibm-odm-make-decision/blob/master/images/test-flow-service-status.png)
 
 The configuration of the node is split into two parts using configuration nodes. The first is the target decision server configuration including the host and authentication details, and the second is the configuration of the rule app and rule set path. This allows a mixture of configurations per node, for example if you want to call the same rule app/rule set but on different target decision servers. Examples can be seen below.
 
-![](./images/server-details-config.png)
+![](https://github.com/BP3/node-red-contrib-ibm-odm-make-decision/blob/master/images/server-details-config.png)
 
-![](./images/ruleapp-details-config.png)
+![](https://github.com/BP3/node-red-contrib-ibm-odm-make-decision/blob/master/images/ruleapp-details-config.png)
 
 You can also set the decision service configuration dynamically by setting properties on the `msg` object, which can be mixed and matched with the defined configuration nodes. An example can be seen below.
 
-![](./images/dynamic-config.png)
+![](https://github.com/BP3/node-red-contrib-ibm-odm-make-decision/blob/master/images/dynamic-config.png)
 
 There is full documentation on how to configure the node within the node help info. There is also an example flow which can be imported from the file `make-decision/make-decision-test-flow.json`.
 
