@@ -104,6 +104,7 @@ describe("test the building of the decision service configuration object", funct
   // This is mocking the configuration nodes and data
   var mockNodeConfig = {
     ruleapp: {
+      decisionId: "12345",
       name: "TestRuleAppConfig",
       ruleappName: "MyRuleAppConfig",
       ruleappVersion: "1.0",
@@ -136,6 +137,7 @@ describe("test the building of the decision service configuration object", funct
 
   // Base expected config that will be changed for each test
   var baseExpectedConfig = {
+    decisionId: "12345",
     ruleappName: "MyRuleAppConfig",
     ruleappVersion: "1.0",
     rulesetName: "MyRuleSetConfig",
@@ -148,6 +150,24 @@ describe("test the building of the decision service configuration object", funct
     authUser: "Test Config User",
     authPassword: "Test Config Password"
   };
+
+  it("should override the decision Id with the value in the message object", function() {
+    var mockMsg = {
+      odm: {
+        config: {
+          decisionId: "54321"
+        }
+      }
+    };
+
+    // Clone the base expected config and alter the data we are overriding
+    var expectedConfig = JSON.parse(JSON.stringify(baseExpectedConfig));
+    expectedConfig.decisionId = mockMsg.odm.config.decisionId;
+
+    var actualConfig = makeDecisionUtils.combineConfig(mockRED, mockNodeConfig, mockMsg);
+
+    chai.expect(actualConfig).to.eql(expectedConfig);
+  });
 
   it("should override the rule app name with the value in the message object", function() {
     var mockMsg = {
