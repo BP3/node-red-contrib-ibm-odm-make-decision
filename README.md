@@ -40,7 +40,7 @@ The execution trace currently only returns the following information. Again of m
 
 # Compatability
 This component has been tested with the following ODM versions:
-- ODM 8.9.2
+- ODM 8.9.2 & 8.10
 - ODM On Cloud (version based on ODM 8.9 at the time of testing)
 
 However given the stable nature of the HTDS functionality in ODM, this should work OK with past versions of ODM that support JSON over REST.
