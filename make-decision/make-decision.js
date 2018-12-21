@@ -45,6 +45,12 @@ module.exports = function(RED) {
         };
       }
 
+      // If we have a decision Id then set this
+      if(localConfig.decisionId)
+      {
+        msg.payload.__DecisionID__ = localConfig.decisionId;
+      }
+
       // Start building up an ODM response object
       msg.odm = {
         requestedUrl: dsUrl,
@@ -71,6 +77,8 @@ module.exports = function(RED) {
 
         console.log("Using basic authentication for this request");
       }
+
+      //console.log(JSON.stringify(msg.payload));
 
       // Sent the request and handle the response
       request.post(postOptions, function(error, response, body) {

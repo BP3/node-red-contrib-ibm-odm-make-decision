@@ -54,9 +54,16 @@ module.exports = function() {
     }
 
     // Load the rule app config node to get the rule app information
+    // If there is no rule app config then create an empty object so we
+    // don't get a NPE when checking further down
     var ruleappConfig = RED.nodes.getNode(nodeConfig.ruleapp);
+    if(!ruleappConfig)
+    {
+      ruleappConfig = {};
+    }
 
     var localConfig = {};
+    localConfig.decisionId = msgConfig.decisionId || ruleappConfig.decisionId;
     localConfig.ruleappName = msgConfig.ruleappName || ruleappConfig.ruleappName;
     localConfig.ruleappVersion = msgConfig.ruleappVersion || ruleappConfig.ruleappVersion;
     localConfig.rulesetName = msgConfig.rulesetName || ruleappConfig.rulesetName;
@@ -65,7 +72,13 @@ module.exports = function() {
         ? msgConfig.includeTrace : ruleappConfig.includeTrace;
 
     // Load the decision server config node to get the credentials and server information
+    // If there is no decision server config then create an empty object so we
+    // don't get a NPE when checking further down
     var decisionServerConfig = RED.nodes.getNode(nodeConfig.server);
+    if(!decisionServerConfig)
+    {
+      decisionServerConfig = {};
+    }
 
     localConfig.protocolHost = msgConfig.protocolHost || decisionServerConfig.protocolHost;
     localConfig.port = msgConfig.port || decisionServerConfig.port;
