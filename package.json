@@ -1,6 +1,6 @@
 {
   "name": "@bp3/node-red-contrib-ibm-odm-make-decision",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Node for calling IBM ODM decision services",
   "main": "make-decision/make-decision.js",
   "scripts": {
