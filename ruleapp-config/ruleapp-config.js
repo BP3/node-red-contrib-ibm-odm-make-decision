@@ -1,24 +1,31 @@
-/*
-This software is provided under the MIT agreement.
-
-Copyright 2018 BP3 Global, Incorporated.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+/*===========================================================================
+ =
+ = Copyright (c) BP3 Global Inc. 2018. All Rights Reserved.
+ =
+ = Permission is hereby granted, free of charge, to any person obtaining
+ = a copy of this software and associated documentation files (the
+ = "Software"), to deal in the Software without restriction, including
+ = without limitation the rights to use, copy, modify, merge, publish,
+ = distribute, sublicense, and/or sell copies of the Software, and to
+ = permit persons to whom the Software is furnished to do so, subject to
+ = the following conditions:
+ =
+ = The above copyright notice and this permission notice shall be
+ = included in all copies or substantial portions of the Software.
+ =
+ ============================================================================*/
 module.exports = function(RED) {
-  function ruleAppConfigNode(n) {
-    RED.nodes.createNode(this, n);
-    this.name = n.name;
-    this.ruleappName = n.ruleappName;
-    this.ruleappVersion = n.ruleappVersion;
-    this.rulesetName = n.rulesetName;
-    this.rulesetVersion = n.rulesetVersion;
-    this.includeTrace = n.includeTrace;
+  function RuleAppConfigNode(config) {
+    RED.nodes.createNode(this, config);
+    this.name = config.name;
+    this.ruleappName = config.ruleappName;
+    this.ruleappVersion = config.ruleappVersion;
+    this.rulesetName = config.rulesetName;
+    this.rulesetVersion = config.rulesetVersion;
+    this.includeTrace = config.includeTrace;
   }
 
-  RED.nodes.registerType("ruleapp-config", ruleAppConfigNode, {
+  RED.nodes.registerType("ruleapp-config", RuleAppConfigNode, {
     defaults: {
       decisionId: {},
       ruleappName: {},
@@ -28,4 +35,4 @@ module.exports = function(RED) {
       includeTrace: {}
     }
   });
-}
+};

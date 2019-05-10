@@ -1,0 +1,22 @@
+{
+  "extends": "eslint:recommended",
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+ "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "forOf": true,
+      "es6": true
+    }
+  },
+  "rules": {
+    "semi": ["error", "always"],
+    "semi-style": ["error", "last"],
+    "quotes": ["error", "double"],
+    "eqeqeq": ["error", "always"],
+    "no-var": 0
+  }
+}

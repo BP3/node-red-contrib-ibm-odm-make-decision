@@ -1,19 +1,21 @@
-/*
-This software is provided under the MIT agreement.
-
-Copyright 2018 BP3 Global, Incorporated.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
+/*===========================================================================
+ =
+ = Copyright (c) BP3 Global Inc. 2018. All Rights Reserved.
+ =
+ = Permission is hereby granted, free of charge, to any person obtaining
+ = a copy of this software and associated documentation files (the
+ = "Software"), to deal in the Software without restriction, including
+ = without limitation the rights to use, copy, modify, merge, publish,
+ = distribute, sublicense, and/or sell copies of the Software, and to
+ = permit persons to whom the Software is furnished to do so, subject to
+ = the following conditions:
+ =
+ = The above copyright notice and this permission notice shall be
+ = included in all copies or substantial portions of the Software.
+ =
+ ============================================================================*/
 module.exports = function() {
-  //
-  // Build the decision service Url from the configured component parts
-  //
   this.buildDecisionServiceURL = function(config) {
-
     console.log("Building the decision service URL");
 
     // Build the server Url. We might not have a port, for example for serviceStatusCode
@@ -24,11 +26,11 @@ module.exports = function() {
     }
 
     dsUrl = dsUrl + "/" + config.baseEndpointURL + "/" + config.ruleappName;
-    if (config.ruleappVersion != null && config.ruleappVersion.length > 0) {
+    if (config.ruleappVersion && config.ruleappVersion.length > 0) {
       dsUrl = dsUrl + "/" + config.ruleappVersion;
     }
     dsUrl = dsUrl + "/" + config.rulesetName;
-    if (config.rulesetVersion != null && config.rulesetVersion.length > 0) {
+    if (config.rulesetVersion && config.rulesetVersion.length > 0) {
       dsUrl = dsUrl + "/" + config.rulesetVersion;
     }
 
@@ -40,116 +42,57 @@ module.exports = function() {
   //
   // Loads the config from either the node or the message (or a combination of both)
   //
-  this.loadConfig = function(RED, nodeConfig, msg) {
-    localConfig = {};
-
+  this.combineConfig = function(RED, nodeConfig, msg) {
     console.log("Loading configuration");
 
+    // We may not have config passed in via the message, only from the
+    // config nodes
+    var msgConfig = {};
+    if(msg.odm && msg.odm.config)
+    {
+      msgConfig = msg.odm.config;
+    }
+
     // Load the rule app config node to get the rule app information
+    // If there is no rule app config then create an empty object so we
+    // don't get a NPE when checking further down
     var ruleappConfig = RED.nodes.getNode(nodeConfig.ruleapp);
-
-    // Rule app name
-    if (this.checkNested(msg, "odm", "config", "ruleappName")) {
-      localConfig.ruleappName = msg.odm.config.ruleappName;
-    } else {
-      localConfig.ruleappName = ruleappConfig.ruleappName;
+    if(!ruleappConfig)
+    {
+      ruleappConfig = {};
     }
 
-    // Rule app version
-    if (this.checkNested(msg, "odm", "config", "ruleappVersion")) {
-      localConfig.ruleappVersion = msg.odm.config.ruleappVersion;
-    } else {
-      localConfig.ruleappVersion = ruleappConfig.ruleappVersion;
-    }
-
-    // Rule set name
-    if (this.checkNested(msg, "odm", "config", "rulesetName")) {
-      localConfig.rulesetName = msg.odm.config.rulesetName;
-    } else {
-      localConfig.rulesetName = ruleappConfig.rulesetName;
-    }
-
-    // Rule set version
-    if (this.checkNested(msg, "odm", "config", "rulesetVersion")) {
-      localConfig.rulesetVersion = msg.odm.config.rulesetVersion;
-    } else {
-      localConfig.rulesetVersion = ruleappConfig.rulesetVersion;
-    }
-
-    // Include trace
-    if (this.checkNested(msg, "odm", "config", "includeTrace")) {
-      localConfig.includeTrace = msg.odm.config.includeTrace;
-    } else {
-      localConfig.includeTrace = ruleappConfig.includeTrace;
-    }
+    var localConfig = {};
+    localConfig.decisionId = msgConfig.decisionId || ruleappConfig.decisionId;
+    localConfig.ruleappName = msgConfig.ruleappName || ruleappConfig.ruleappName;
+    localConfig.ruleappVersion = msgConfig.ruleappVersion || ruleappConfig.ruleappVersion;
+    localConfig.rulesetName = msgConfig.rulesetName || ruleappConfig.rulesetName;
+    localConfig.rulesetVersion = msgConfig.rulesetVersion || ruleappConfig.rulesetVersion;
+    localConfig.includeTrace = msgConfig.includeTrace !== undefined
+        ? msgConfig.includeTrace : ruleappConfig.includeTrace;
 
     // Load the decision server config node to get the credentials and server information
+    // If there is no decision server config then create an empty object so we
+    // don't get a NPE when checking further down
     var decisionServerConfig = RED.nodes.getNode(nodeConfig.server);
-
-    // Host
-    if (this.checkNested(msg, "odm", "config", "protocolHost")) {
-      localConfig.protocolHost = msg.odm.config.protocolHost;
-    } else {
-      localConfig.protocolHost = decisionServerConfig.protocolHost;
+    if(!decisionServerConfig)
+    {
+      decisionServerConfig = {};
     }
 
-    // Port
-    if (this.checkNested(msg, "odm", "config", "port")) {
-      localConfig.port = msg.odm.config.port;
-    } else {
-      localConfig.port = decisionServerConfig.port;
-    }
-
-    // Base endpoint URL
-    if (this.checkNested(msg, "odm", "config", "baseEndpointURL")) {
-      localConfig.baseEndpointURL = msg.odm.config.baseEndpointURL;
-    } else {
-      localConfig.baseEndpointURL = decisionServerConfig.baseEndpointURL;
-    }
-
-    // Use basic authentication
-    if (this.checkNested(msg, "odm", "config", "useBasicAuthentication")) {
-      localConfig.useBasicAuthentication = msg.odm.config.useBasicAuthentication;
-    } else {
-      localConfig.useBasicAuthentication = decisionServerConfig.useBasicAuthentication;
-    }
-
-    // Auth user
-    if (this.checkNested(msg, "odm", "config", "authUser")) {
-      localConfig.authUser = msg.odm.config.authUser;
-    } else {
-      localConfig.authUser = decisionServerConfig.credentials.authUser;
-    }
-
-    // Auth password
-    if (this.checkNested(msg, "odm", "config", "authPassword")) {
-      localConfig.authPassword = msg.odm.config.authPassword;
-    } else {
-      localConfig.authPassword = decisionServerConfig.credentials.authPassword;
-    }
+    localConfig.protocolHost = msgConfig.protocolHost || decisionServerConfig.protocolHost;
+    localConfig.port = msgConfig.port || decisionServerConfig.port;
+    localConfig.baseEndpointURL = msgConfig.baseEndpointURL || decisionServerConfig.baseEndpointURL;
+    localConfig.useBasicAuthentication = msgConfig.useBasicAuthentication !== undefined
+        ? msgConfig.useBasicAuthentication : decisionServerConfig.useBasicAuthentication;
+    localConfig.authUser = msgConfig.authUser || decisionServerConfig.credentials.authUser;
+    localConfig.authPassword = msgConfig.authPassword || decisionServerConfig.credentials.authPassword;
 
     // Create an obfuscated deep copy config object for logging purposes
-    var configForLogging = JSON.parse(JSON.stringify(localConfig))
+    var configForLogging = JSON.parse(JSON.stringify(localConfig));
     configForLogging.authPassword = "******";
-
     console.log("Loaded configuration " + JSON.stringify(configForLogging));
 
     return localConfig;
   };
-
-  //
-  // Utility method to allow the checking of nested objects
-  // Taken from: https://stackoverflow.com/a/2631198/811108
-  //
-  this.checkNested = function(obj /*, level1, level2, ... levelN*/ ) {
-    var args = Array.prototype.slice.call(arguments, 1);
-
-    for (var i = 0; i < args.length; i++) {
-      if (!obj || !obj.hasOwnProperty(args[i])) {
-        return false;
-      }
-      obj = obj[args[i]];
-    }
-    return true;
-  };
-}
+};

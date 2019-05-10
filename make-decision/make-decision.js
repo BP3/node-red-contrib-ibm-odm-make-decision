@@ -1,35 +1,37 @@
-/*
-This software is provided under the MIT agreement.
-
-Copyright 2018 BP3 Global, Incorporated.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-// Use the Node.js 'jsonpath' module
+/*===========================================================================
+ =
+ = Copyright (c) BP3 Global Inc. 2018. All Rights Reserved.
+ =
+ = Permission is hereby granted, free of charge, to any person obtaining
+ = a copy of this software and associated documentation files (the
+ = "Software"), to deal in the Software without restriction, including
+ = without limitation the rights to use, copy, modify, merge, publish,
+ = distribute, sublicense, and/or sell copies of the Software, and to
+ = permit persons to whom the Software is furnished to do so, subject to
+ = the following conditions:
+ =
+ = The above copyright notice and this permission notice shall be
+ = included in all copies or substantial portions of the Software.
+ =
+ ============================================================================*/
 var jsonpath = require("jsonpath");
-
-// Use the Node.js 'request' module
 var request = require("request");
-
-// Use the make decision utils module
 var MakeDecisionUtils = require("./make-decision-utils.js");
 
 module.exports = function(RED) {
-  function makeDecision(nodeConfig) {
-    RED.nodes.createNode(this, nodeConfig);
+  function MakeDecision(config) {
+    RED.nodes.createNode(this, config);
     var node = this;
 
     node.on("input", function(msg) {
 
       console.log("Make decision input called");
 
-      makeDecisionUtils = new MakeDecisionUtils();
+      var makeDecisionUtils = new MakeDecisionUtils();
 
       // If all or some of the service configuration has been passed through in the message
       // rather than via the nodes config then use them over the configuration
-      var localConfig = makeDecisionUtils.loadConfig(RED, nodeConfig, msg);
+      var localConfig = makeDecisionUtils.combineConfig(RED, config, msg);
 
       // Build the full decision endpoint URL
       var dsUrl = makeDecisionUtils.buildDecisionServiceURL(localConfig);
@@ -41,6 +43,12 @@ module.exports = function(RED) {
           infoExecutionDate: true,
           infoRulesFired: true
         };
+      }
+
+      // If we have a decision Id then set this
+      if(localConfig.decisionId)
+      {
+        msg.payload.__DecisionID__ = localConfig.decisionId;
       }
 
       // Start building up an ODM response object
@@ -65,10 +73,12 @@ module.exports = function(RED) {
           user: localConfig.authUser,
           pass: localConfig.authPassword,
           sendImmediately: true
-        }
+        };
 
         console.log("Using basic authentication for this request");
       }
+
+      //console.log(JSON.stringify(msg.payload));
 
       // Sent the request and handle the response
       request.post(postOptions, function(error, response, body) {
@@ -81,7 +91,7 @@ module.exports = function(RED) {
         }
 
         // If everything went OK and we got back a response
-        if (!error && response.statusCode == 200) {
+        if (!error && response.statusCode === 200) {
           msg.payload = body;
           msg.odm.decisionId = body.__DecisionID__;
 
@@ -102,7 +112,7 @@ module.exports = function(RED) {
 
           // else if we didnt get an error but we didnt get back a 200 so
           // treat as an error return the whole response
-        } else if (!error && response.statusCode != 200) {
+        } else if (!error && response.statusCode !== 200) {
           msg.payload = response;
           msg.odm.hasErrored = true;
           node.status({
@@ -121,10 +131,10 @@ module.exports = function(RED) {
           });
         }
 
-        node.send(msg)
+        node.send(msg);
       });
     });
   }
 
-  RED.nodes.registerType("make-decision", makeDecision);
+  RED.nodes.registerType("make-decision", MakeDecision);
 };

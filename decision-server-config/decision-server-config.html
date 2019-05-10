@@ -1,12 +1,19 @@
-<!--
-This software is provided under the MIT agreement.
-
-Copyright 2018 BP3 Global, Incorporated.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
+<!--========================================================================
+ =
+ = Copyright (c) BP3 Global Inc. 2018. All Rights Reserved.
+ =
+ = Permission is hereby granted, free of charge, to any person obtaining
+ = a copy of this software and associated documentation files (the
+ = "Software"), to deal in the Software without restriction, including
+ = without limitation the rights to use, copy, modify, merge, publish,
+ = distribute, sublicense, and/or sell copies of the Software, and to
+ = permit persons to whom the Software is furnished to do so, subject to
+ = the following conditions:
+ =
+ = The above copyright notice and this permission notice shall be
+ = included in all copies or substantial portions of the Software.
+ =
+ ===========================================================================-->
 <script type="text/javascript">
   RED.nodes.registerType("decision-server-config", {
     category: "config",
@@ -65,16 +72,19 @@ The above copyright notice and this permission notice shall be included in all c
   <p>The available configuration properties are:</p>
   <ul>
     <li>
-      <b>Protocol Host:</b> This is the HTTP protocol and the host, for example <code>http://localhost</code> or <code>https://myodm.bpm.ibmcloud.com</code>.
+      <b>Protocol Host:</b> This is the HTTP protocol and the host, for example <code>http://localhost</code>
+       or <code>https://myodm.bpm.ibmcloud.com</code>.
     </li>
     <li>
       <b>Port:</b> This is the port (which can be blank), for example <code>9080</code> or <code>9443</code>.
     </li>
     <li>
-      <b>Base End Point URL:</b> This is the endpoint base URL upto the rule app name (but after the protocol and host) which forms the start of the ruleset path. For example <code>odm/dev/DecisionService/rest/v1</code>.
+      <b>Base End Point URL:</b> This is the endpoint base URL upto the rule app name (but after the protocol and host)
+       which forms the start of the ruleset path. For example <code>odm/dev/DecisionService/rest/v1</code>.
     </li>
     <li>
-      <b>Use Basic Authentication?:</b> If set to <code>true</code> then the decision service call will attempt to authenticate using Basic Authentication. If set to <code>false</code> then no authentication will be performed.
+      <b>Use Basic Authentication?:</b> If set to <code>true</code> then the decision service call will attempt to
+       authenticate using Basic Authentication. If set to <code>false</code> then no authentication will be performed.
     </li>
     <li>
       <b>Authentication User:</b> The user used in the basic authentication authorisation process.
