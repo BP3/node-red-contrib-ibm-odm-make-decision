@@ -26,3 +26,7 @@
 # System Files
 .DS_Store
 Thumbs.db
+
+# Docker files
+*.backup
+flows_cred.json

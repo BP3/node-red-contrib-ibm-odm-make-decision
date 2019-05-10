@@ -27,6 +27,8 @@ There is full documentation on how to configure the node within the node help in
 # Testing
 To run the unit tests, use the following command from the root of the project: `npm test`.
 
+There is also a Docker Compose YML file `node-red/docker-compose.yml` that will create a basic Node-RED server. Once started you can then see the test flow with described earlier. To run the Node-RED container you will need to first install Docker, and then run the following command: `docker-compose up`.
+
 # Limitations
 The component currently only works with JSON/REST services. This decision was made due to the fact that JSON/REST is the most popular method of communicating with ODM decision services, and that natively Node-RED works with JSON and Javascript Objects. If there is a demand for SOAP or XML/REST, then we will look to build it into the component.
 
@@ -41,6 +43,6 @@ The execution trace currently only returns the following information. Again of m
 # Compatability
 This component has been tested with the following ODM versions:
 - ODM 8.9.2 & 8.10
-- ODM On Cloud (version based on ODM 8.9 at the time of testing)
+- ODM On Cloud
 
 However given the stable nature of the HTDS functionality in ODM, this should work OK with past versions of ODM that support JSON over REST.
