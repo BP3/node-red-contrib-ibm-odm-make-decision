@@ -1,6 +1,6 @@
 {
   "name": "@bp3/node-red-contrib-ibm-odm-make-decision",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "description": "Node for calling IBM ODM decision services",
   "main": "make-decision/make-decision.js",
   "scripts": {
@@ -27,13 +27,13 @@
     }
   },
   "dependencies": {
-    "jsonpath": "^1.0.2",
+    "jsonpath": "^1.1.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^7.1.1",
-    "eslint": "^6.8.0"
+    "chai": "^4.3.4",
+    "mocha": "^9.1.1",
+    "eslint": "^7.32.0"
   },
   "homepage": "https://github.com/BP3/node-red-contrib-ibm-odm-make-decision",
   "author": "Justin Phillips (BP3 Global, Incorporated)",
